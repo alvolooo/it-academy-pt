@@ -1,0 +1,31 @@
+.body {
+  width: 100vw;
+  height: 10vh;
+}
+
+.container {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1360px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__counter {
+    font-size: 25px;
+    padding: 5px;
+    color: black;
+    border-radius: 4px;
+    border: 1px solid black;
+    margin-right: 10px;
+  }
+
+  &__button {
+    border-radius: 4px;
+    background: #FF3300;
+    color: white;
+    font-size: 16px;
+    padding: 12px 10px 13px 7px;
+  }
+}
