@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import classes from "./table.module.scss";
 import axios from "axios";
 import { User } from "../types/user";
-import {api} from "../../service/api.service";
+import { api } from "../../service/api.service";
 
 type Props = {
-  blockUser(id: number): Promise<User>;
+  blockUser(id: number): void;
 } & User;
 
 const GenerateRow = ({ name, role, id, blockUser, status, email }: Props) => {
@@ -40,8 +40,8 @@ export const Table = () => {
   };
 
   const getUsers = async () => {
-    const response = await api[`users`].getList()
-    setUsers(response)
+    const response = await api[`users`].getList();
+    setUsers(response);
   };
 
   useEffect(() => {
@@ -58,15 +58,10 @@ export const Table = () => {
   };
 
   const blockUser = async (id: number) => {
-    const response = await api[`users`].delete((id))
-    if()
-
-    // return axios
-    //   .delete(`http://localhost:5050/users/${id}`)
-    //   .then((response) => {
-    //     getUsers();
-    //     return response.data;
-    //   });
+    const response = await api[`users`].delete(id);
+    if (response) {
+      await getUsers();
+    }
   };
 
   const createUser = async () => {
