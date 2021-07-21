@@ -19,12 +19,12 @@ export class ApiAbstract<T, K> implements ApiAbstractInterface<T, K> {
     return response.data;
   }
 
-  async post(data: K): Promise<[T]> {
+  async post(data: K): Promise<T> {
     const response = await this.http.post(`${this.apiPath}`, data);
     return response.data;
   }
 
-  async delete(id: number): Promise<[T]> {
+  async delete(id: number): Promise<T> {
     const response = await this.http.delete(`${this.apiPath}/${id}`);
     return response.data;
   }

@@ -3,6 +3,7 @@ import classes from "./table.module.scss";
 import axios from "axios";
 import { User } from "../types/user";
 import { api } from "../../service/api.service";
+import { NavLink } from "react-router-dom";
 
 type Props = {
   blockUser(id: number): void;
