@@ -1,5 +1,4 @@
 import { Dispatch } from "react";
-
 import { useAuth } from "../../hooks/useAuth";
 import { ActionTypes, AuthType } from "../../Components/types/auth";
 

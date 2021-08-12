@@ -1,10 +1,4 @@
-import type { ActionState } from "./actions-create/authAction";
-
-// export type AuthState = {
-//   login: string;
-//   name: string;
-//   token: string;
-// };
+import { ActionState } from "../Components/types/auth";
 
 export type RootState = {
   auth: ActionState;

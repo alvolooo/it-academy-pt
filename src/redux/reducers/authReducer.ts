@@ -2,7 +2,7 @@ import {
   ActionState,
   ActionTypes,
   AuthType,
-} from "../actions-create/authAction";
+} from "../../Components/types/auth";
 
 const initialState: ActionState = {
   login: "",
@@ -10,7 +10,6 @@ const initialState: ActionState = {
   name: "",
   in_progress: false,
 };
-
 export const authReducer = (state = initialState, action: ActionTypes) => {
   switch (action.type) {
     case AuthType.LOGIN: {
@@ -19,9 +18,8 @@ export const authReducer = (state = initialState, action: ActionTypes) => {
     case AuthType.LOGOUT: {
       return { ...state, login: "", token: "", name: "" };
     }
-    case AuthType.IN_PROGRESS: {
+    case AuthType.IN_PROGRESS:
       return { ...state, in_progress: action.payLoad };
-    }
     default: {
       return state;
     }
