@@ -1,13 +1,39 @@
 import React, { useEffect, useState } from "react";
-import classes from "./table.module.scss";
 import axios from "axios";
+import Container from "@material-ui/core/Container";
+import Link from "@material-ui/core/Link";
+import Breadcrumbs from "@material-ui/core/Breadcrumbs";
+import Button from "@material-ui/core/Button";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
+//other
+import classes from "./table.module.scss";
 import { User } from "../types/user";
 import { api } from "../../service/api.service";
-import { NavLink } from "react-router-dom";
 
 type Props = {
   blockUser(id: number): void;
 } & User;
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      "& > *": {
+        margin: theme.spacing(1),
+        width: "25ch",
+      },
+    },
+  })
+);
+
+const schema = Yup.object().shape({
+  email: Yup.string().email().required("Enter Email"),
+  name: Yup.string().required("Enter Name and Surname"),
+  role: Yup.string().required("Enter your server role"),
+});
 
 const GenerateRow = ({ name, role, id, blockUser, status, email }: Props) => {
   const statusName = status === 1 ? "Активен" : "Заблокирован";
@@ -33,6 +59,39 @@ export const Table = () => {
   const [status, setStatus] = useState(1);
   const [users, setUsers] = useState<[] | User[]>([]);
 
+  const { values, errors, handleSubmit, handleChange, touched } = useFormik({
+    initialValues: {
+      email: "",
+      name: "",
+      role: "",
+      status: "",
+    },
+
+    validationSchema: Yup.object().shape({
+      email: Yup.string()
+        .email("Не является email")
+        .required("Обязательное поле для заполнения"),
+      name: Yup.string()
+        .required("Обязательное поле для заполнения")
+        .min(2, "Минимум 2 символа"),
+      role: Yup.string().required("Обязательное поле для заполнения"),
+      status: Yup.string().required("Обязательное поле для заполнения"),
+    }),
+
+    onSubmit: async (data: any) => {
+      return axios
+        .post(`http://localhost:5050/users`, {
+          name: name,
+          email: email,
+          role: role,
+          status: status,
+        })
+        .then(function (response) {
+          getUsers();
+        });
+    },
+  });
+
   const onChangeHandler = (e: any) => {
     if (e.target.name == "email") return setEmail(e.target.value);
     if (e.target.name == "name") return setName(e.target.value);
@@ -48,15 +107,6 @@ export const Table = () => {
   useEffect(() => {
     getUsers();
   }, []);
-
-  const deleteUser = async (id: number) => {
-    return axios
-      .delete(`http://localhost:5050/users/${id}`)
-      .then((response) => {
-        getUsers();
-        return response.data;
-      });
-  };
 
   const blockUser = async (id: number) => {
     const response = await api[`users`].delete(id);
@@ -77,8 +127,17 @@ export const Table = () => {
         getUsers();
       });
   };
+
   return (
-    <>
+    <Container maxWidth="md">
+      <Breadcrumbs aria-label="breadcrumb" className={classes.bread}>
+        <Link color="inherit" href="/">
+          Главная
+        </Link>
+        <Link color="textPrimary" href="http://localhost:3000/login">
+          Таблица
+        </Link>
+      </Breadcrumbs>
       <div className={classes.section}>
         <table className={classes.table}>
           <thead className={classes.thead}>
@@ -104,38 +163,77 @@ export const Table = () => {
             ))}
           </tbody>
         </table>
+
         <div className={classes.createBlock}>
-          <input
-            type="text"
+          <TextField
+            id="standard-basic"
+            label="Email"
+            color="secondary"
+            type={"text"}
+            value={values.email}
             name={"email"}
-            placeholder={"Email"}
-            onChange={onChangeHandler}
-            className={classes.emailInput}
+            onChange={handleChange}
+            error={!!(errors.email && touched.email)}
+            helperText={
+              errors.email && touched.email ? errors.email : "Обязательное поле"
+            }
           />
-          <input
-            type="text"
+
+          <TextField
+            id="standard-basic"
+            label="Name"
+            color="secondary"
+            type={"text"}
+            value={values.name}
             name={"name"}
-            placeholder={"Name"}
-            onChange={onChangeHandler}
-            className={classes.nameInput}
+            onChange={handleChange}
+            error={!!(errors.name && touched.name)}
+            helperText={
+              errors.name && touched.name ? errors.name : "Обязательное поле"
+            }
           />
-          <input
-            type="text"
+
+          <TextField
+            id="standard-basic"
+            label="Role"
+            color="secondary"
+            type={"text"}
+            value={values.role}
             name={"role"}
-            placeholder={"Role"}
-            onChange={onChangeHandler}
-            className={classes.roleInput}
+            onChange={handleChange}
+            error={!!(errors.role && touched.role)}
+            helperText={
+              errors.role && touched.role ? errors.role : "Обязательное поле"
+            }
           />
-          <input
-            type="text"
+
+          <TextField
+            id="standard-basic"
+            label="Status"
+            color="secondary"
+            type={"text"}
+            value={values.status}
             name={"status"}
-            placeholder={"Status"}
-            onChange={onChangeHandler}
-            className={classes.statusInput}
+            onChange={handleChange}
+            error={!!(errors.status && touched.status)}
+            helperText={
+              errors.status && touched.status
+                ? errors.status
+                : "Обязательное поле"
+            }
           />
-          <div onClick={createUser}>tap</div>
+          <div className={classes.but}>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={createUser}
+              className={classes.but}
+            >
+              Отправить
+            </Button>
+          </div>
         </div>
       </div>
-    </>
+    </Container>
   );
 };

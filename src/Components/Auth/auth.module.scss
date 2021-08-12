@@ -1,0 +1,81 @@
+.main {
+  margin-bottom: 166px;
+}
+
+.title {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 69px;
+  /* or 144% */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+
+  /* 3 */
+
+  color: #FFFFFF;
+
+}
+
+.authBlock {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  &__input {
+    width: 277px;
+    height: 61px;
+
+    /* 4 */
+
+    border: 2px solid #898989;
+    box-sizing: border-box;
+    border-radius: 42px;
+    margin-right: 20px;
+    background: none;
+
+    font-family: "Golos Medium";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 46px;
+    /* or 253% */
+
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.01em;
+    padding-left: 21px;
+
+    /* 5 */
+
+    color: #F1F1F1;
+
+    &::-moz-placeholder { color: #F1F1F1;; }
+    &::-webkit-input-placeholder { color: #F1F1F1; }
+  }
+
+
+}
+
+.issueBlock {
+  margin-top: 25px;
+}
+
+.issue {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 22px;
+  /* or 138% */
+
+  letter-spacing: -0.01em;
+
+  color: #919191;
+  margin: 0;
+  margin-bottom: 3px;
+  span {
+    color: #FFFFFF;
+  }
+}

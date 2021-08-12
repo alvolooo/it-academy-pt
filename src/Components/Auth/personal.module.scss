@@ -1,0 +1,47 @@
+.mainCont {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 75px;
+  &__photo {
+    width: 24%;
+  }
+}
+
+.nameCont {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  &__name {
+    width: 70%;
+    margin-bottom: 20px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 55px;
+    /* or 115% */
+
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+
+    /* 3 */
+
+    color: #FFFFFF;
+  }
+  &__email{
+    margin-top: 0;
+    margin-bottom: 0;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 27px;
+    /* identical to box height, or 121% */
+
+    letter-spacing: -0.01em;
+
+    /* 3 */
+
+    color: #FFFFFF;
+  }
+}

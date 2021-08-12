@@ -103,6 +103,20 @@ export const Bar = () => {
           <ListItemText primary={"Счетчик"} />
         </ListItem>
       </List>
+
+      <List>
+        <ListItem
+          button
+          onClick={() => {
+            history.push("/courses");
+          }}
+        >
+          <ListItemIcon>
+            <BrightnessLowIcon />
+          </ListItemIcon>
+          <ListItemText primary={"Курсы"} />
+        </ListItem>
+      </List>
     </div>
   );
 

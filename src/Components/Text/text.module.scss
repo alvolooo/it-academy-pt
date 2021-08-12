@@ -1,0 +1,41 @@
+a {
+  text-decoration: none;
+}
+
+.text {
+  &__gold{
+    font-weight: normal;
+    font-size: 16px;
+    /* or 119% */
+
+    text-transform: lowercase;
+
+    /* 2 */
+
+    color: #FFE924;
+    margin-bottom: 6px;
+  }
+  &__white{
+    font-weight: normal;
+    font-size: 16px;
+    /* or 119% */
+
+    text-transform: lowercase;
+
+    /* 2 */
+
+    color: #FFFFFF;
+    margin-bottom: 6px;
+  }
+  &__grey{
+    font-weight: normal;
+    font-size: 16px;
+    /* or 119% */
+
+
+    /* 4 */
+
+    color: #898989;
+    margin-bottom: 6px;
+  }
+}

@@ -1,11 +1,10 @@
-import { Bar } from "../../Components";
-import { TreeContainer } from "../../Containers/TreeContainer";
+import { Bar, Tree } from "../../Components";
 
 export const TreePage = () => {
   return (
     <>
       <Bar />
-      <TreeContainer />
+      <Tree />
     </>
   );
 };

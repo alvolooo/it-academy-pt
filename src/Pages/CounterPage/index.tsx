@@ -1,11 +1,10 @@
-import { Bar } from "../../Components";
-import { CounterContainer } from "../../Containers/CounterContainer";
+import { Bar, Counter } from "../../Components";
 
 export const CounterPage = () => {
   return (
     <>
       <Bar />
-      <CounterContainer />
+      <Counter />
     </>
   );
 };

@@ -3,6 +3,9 @@ import classes from "./tree.module.scss";
 import { TreeOfOrganizations } from "../types/treeOfOrganizations";
 import { Employee } from "../types/employee";
 import { api } from "../../service/api.service";
+import Container from "@material-ui/core/Container";
+import Link from "@material-ui/core/Link";
+import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 
 export const Tree = () => {
   const [tree, setTree] = useState<[] | TreeOfOrganizations[]>([]);
@@ -59,15 +62,22 @@ export const Tree = () => {
     const hasChild = !!node.organizations;
 
     return (
-      <li key={node.id} onClick={(event) => setChildVisible((v) => !v)}>
-        <span className={classes.expandingText}>{node.name}</span>
-        {hasChild && childVisible && (
-          <div key={node.id} onClick={(event) => setChildVisible((v) => !v)}>
-            {userChecker(node)}
-            {<SubTree data={node.organizations} />}
-          </div>
-        )}
-      </li>
+      <>
+        <Container maxWidth="md">
+          <li key={node.id} onClick={(event) => setChildVisible((v) => !v)}>
+            <span className={classes.expandingText}>{node.name}</span>
+            {hasChild && childVisible && (
+              <div
+                key={node.id}
+                onClick={(event) => setChildVisible((v) => !v)}
+              >
+                {userChecker(node)}
+                {<SubTree data={node.organizations} />}
+              </div>
+            )}
+          </li>
+        </Container>
+      </>
     );
   };
 
@@ -78,10 +88,20 @@ export const Tree = () => {
   );
 
   return (
-    <div className={classes.body}>
-      <div className={classes.container}>
-        <SubTree data={tree} />
+    <Container maxWidth="md">
+      <Breadcrumbs aria-label="breadcrumb" className={classes.bread}>
+        <Link color="inherit" href="/">
+          Главная
+        </Link>
+        <Link color="textPrimary" href="http://localhost:3000/login">
+          Дерево
+        </Link>
+      </Breadcrumbs>
+      <div className={classes.body}>
+        <div className={classes.container}>
+          <SubTree data={tree} />
+        </div>
       </div>
-    </div>
+    </Container>
   );
 };

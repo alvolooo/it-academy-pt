@@ -1,11 +1,10 @@
-import { Bar } from "../../Components";
-import { LoginContainer } from "../../Containers/LoginContainer";
+import { Bar, LoginComponent } from "../../Components";
 
 export const Login = () => {
   return (
     <>
       <Bar />
-      <LoginContainer />
+      <LoginComponent />
     </>
   );
 };

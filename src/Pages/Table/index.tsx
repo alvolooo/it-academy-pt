@@ -1,12 +1,11 @@
 import React from "react";
-import { Bar } from "../../Components";
-import { TableContainer } from "../../Containers/TableContainer";
+import { Bar, Table } from "../../Components";
 
 export const TablePage = () => {
   return (
     <>
       <Bar />
-      <TableContainer />
+      <Table />
     </>
   );
 };

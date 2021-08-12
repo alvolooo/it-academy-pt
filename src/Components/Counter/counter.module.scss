@@ -18,13 +18,16 @@
     border-radius: 4px;
     border: 1px solid black;
     margin-right: 10px;
+    margin: 20px;
   }
 
   &__button {
-    border-radius: 4px;
-    background: #FF3300;
-    color: white;
-    font-size: 16px;
-    padding: 12px 10px 13px 7px;
+    //border-radius: 4px;
+    //background: #FF3300;
+    //color: white;
+    //font-size: 16px;
+    //padding: 12px 10px 13px 7px;
+    padding: 10px;
+
   }
 }
