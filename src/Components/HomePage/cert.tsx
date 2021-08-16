@@ -1,11 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 
-import { ReactComponent as Certif } from "../../assets/certificate.svg";
+import { ReactComponent as BlackRec } from "../../assets/Rectangle1167.svg";
+import { ReactComponent as CertificateImage } from "../../assets/certificate.svg";
 import classes from "./cert.module.scss";
-import { AuthState, RootState } from "../../redux/type";
+import { RootState } from "../../redux/type";
+import { ActionCertState } from "../types/cert";
+import { useState } from "react";
 
 export const Cert = () => {
-  const state = useSelector<RootState, AuthState>((state) => state.auth);
+  const state = useSelector<RootState, ActionCertState>((state) => state.cert);
   return (
     <div>
       <div className={classes.container}>
@@ -13,28 +16,33 @@ export const Cert = () => {
           <div>
             <p className={classes.title}>Сертификат</p>
             <p className={classes.text}>
-              № 08-09270-7321897 <br /> {state.name}
+              № {state.id} <br /> {state.fullName}
             </p>
           </div>
           <div>
-            <div>
-              <p className={classes.title}>Направление подготовки:</p>
-              <p className={classes.text}>Design</p>
-            </div>
-            <div>
-              <p className={classes.title}>Период обучения:</p>
-              <p className={classes.text}> 01.07.2021-30.08.2021</p>
-            </div>
-            <div>
-              <p className={classes.title}>Изучено:</p>
-              <p className={classes.text}>
-                Принципы создания макета; Прототипирование; <br />
-                Основы Figma; UX-analytics
-              </p>
-            </div>
+            <p className={classes.title}>Преподаватель:</p>
+            <p className={classes.text}> Щелкунова Ю.С.</p>
+          </div>
+          <div>
+            <p className={classes.title}>Направление подготовки:</p>
+            <p className={classes.text}>{state.direction}</p>
+          </div>
+          <div>
+            <p className={classes.title}>Период обучения:</p>
+            <p className={classes.text}>
+              {" "}
+              {state.dateStart} - {state.dateFinish}
+            </p>
+          </div>
+          <div>
+            <p className={classes.title}>Изучено:</p>
+            <p className={classes.text}>{state.features}</p>
           </div>
         </div>
-        <Certif className={classes.cer} />
+        {/*<div className={classes.certificate}>*/}
+        {/*  <BlackRec className={classes.certificate__blackRec} />*/}
+        {/*</div>*/}
+        <CertificateImage className={classes.cer} />
       </div>
       <div className={classes.share}>поделиться</div>
     </div>

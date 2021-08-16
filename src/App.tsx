@@ -4,16 +4,15 @@ import { Counter, Table, Tree } from "./Components";
 import "./app.module.scss";
 import { Router } from "./router";
 import { useDispatch } from "react-redux";
-// import { loginAction } from "./redux/actions-create/authAction";
-// import { AuthState } from "./redux/type";
+import { login } from "./redux/actions-create/authAction";
+import { ActionState } from "./Components/types/auth";
 
 export function App() {
-  const dispatch = useDispatch();
   useEffect(() => {
     const jsonUserData = localStorage.getItem("userData");
     if (jsonUserData) {
-      const userData: AuthState = JSON.parse(jsonUserData);
-      dispatch(loginAction(userData));
+      const userData: ActionState = JSON.parse(jsonUserData);
+      login();
     }
   }, []);
   return <Router />;

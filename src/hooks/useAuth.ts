@@ -1,3 +1,7 @@
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/type";
+import { ActionState } from "../redux/actions-create/authAction";
+
 interface LoginData {
   login: string;
   name: string;
@@ -11,8 +15,14 @@ type UseAuthType = {
 // @ts-ignore
 function getData(): Promise<LoginData> {
   return new Promise<LoginData>((resolve) => {
+    const state = useSelector<RootState, ActionState>((state) => state.auth);
     setTimeout(
-      () => resolve({ login: "testLogin", name: "Petr", token: "testToken" }),
+      () =>
+        resolve({
+          login: state.login,
+          name: state.name,
+          token: state.token,
+        }),
       2000
     );
   });

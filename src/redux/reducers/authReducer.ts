@@ -10,6 +10,7 @@ const initialState: ActionState = {
   name: "",
   in_progress: false,
 };
+
 export const authReducer = (state = initialState, action: ActionTypes) => {
   switch (action.type) {
     case AuthType.LOGIN: {

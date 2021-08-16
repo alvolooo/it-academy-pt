@@ -1,11 +1,5 @@
 import React, { useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AuthState, RootState } from "../../redux/type";
-import {
-  loginAction,
-  LoginAction,
-  logoutAction,
-} from "../../redux/actions-create/authAction";
 
 import { Main } from "../../Layouts/Main";
 import { Container } from "../../Components/Container";
@@ -137,11 +131,7 @@ export const Landing = () => {
             <CertChecker />
           </Container>
         </Wrapper>
-        <Wrapper theme={"light"}>
-          <Container>
-            <Cert />
-          </Container>
-        </Wrapper>
+
         <Wrapper theme={"dark"}>
           <Container>
             <Directions />

@@ -1,33 +1,42 @@
 import {
-  SHOW_CERT,
-  HIDE_CERT,
-  CertificateAction,
-} from "../actions-create/certActions";
+  ActionCertState,
+  CertType,
+  CertTypes,
+} from "../../Components/types/cert";
 
-const initialState = {
-  id: "",
+const initialState: ActionCertState = {
+  id: 0,
   fullName: "",
   direction: "",
   dateStart: "",
   dateFinish: "",
-  features: "",
+  features: [],
+  in_progress: false,
 };
 
-// export const certReducer = (
-//   state = initialState,
-//   action: CertificateAction
-// ) => {
-//   switch (action.type) {
-//     case SHOW_CERT: {
-//       const { id, fullName, direction, dateStart, dateFinish, features } =
-//         action;
-//       return { ...state, login, token, name };
-//     }
-//     case HIDE_CERT: {
-//       return { ...state, login: "", token: "", name: "" };
-//     }
-//     default: {
-//       return state;
-//     }
-//   }
-// };
+export const certReducer = (state = initialState, action: CertTypes) => {
+  switch (action.type) {
+    case CertType.ADD_CERT: {
+      return {
+        ...state,
+        ...action.payLoad,
+      };
+    }
+    case CertType.DEL_CERT: {
+      return {
+        ...state,
+        id: 0,
+        fullName: "",
+        direction: "",
+        dateStart: "",
+        dateFinish: "",
+        features: [],
+      };
+    }
+    case CertType.IN_PROGRESS:
+      return { ...state, in_progress: action.payLoad };
+    default: {
+      return state;
+    }
+  }
+};

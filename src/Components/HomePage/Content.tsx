@@ -15,7 +15,12 @@ export const Content = () => {
       <p className={classes.otherText}>
         Пройди обучение и получи сертификат подтверждающий квалификацию
       </p>
-      <button className={classes.toCheckBut}>ПРОВЕРИТЬ СЕРТИФИКАТ</button>
+      <button
+        className={classes.toCheckBut}
+        onClick={() => window.scrollTo({ top: 1000, behavior: "smooth" })}
+      >
+        ПРОВЕРИТЬ СЕРТИФИКАТ
+      </button>
       <hr className={classes.line} />
       <p className={classes.why}>Зачем?</p>
       <p className={classes.text}>

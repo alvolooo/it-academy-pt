@@ -79,10 +79,10 @@ margin-top: 15px;
 
 .arrow {
   margin-right: 20px;
-}
-
-.arrow:hover {
-  fill: black;
-  background: #000;
-  filter: invert(100%);
+  &__active {
+    fill: black;
+    background: #000;
+    filter: invert(100%);
+    margin-right: 20px;
+  }
 }

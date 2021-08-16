@@ -5,17 +5,25 @@ import { NavLink } from "react-router-dom";
 //other
 import classes from "./auth.module.scss";
 import { ReactComponent as Arrow } from "../../assets/arrowWhite.svg";
-import { useDispatch } from "react-redux";
-import { logout } from "../../redux/actions-create/authAction";
-import { login } from "../../redux/actions-create/authAction";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  logout,
+  login,
+  ActionState,
+} from "../../redux/actions-create/authAction";
+import { RootState } from "../../redux/type";
+import { ReactComponent as DisabledArrow } from "../../assets/Union.svg";
 
 export const Auth = () => {
   const dispatch = useDispatch();
-  const [login, setLogin] = useState("");
+  const state = useSelector<RootState, ActionState>((state) => state.auth);
+  const [loginn, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
   const onChangeHandlerLogin = (e: any) => {
-    setLogin(e.target.value);
+    state.login = e.target.value;
+    state.name = "Voloshina Alexandra Andreevna";
+    state.token = "123456";
   };
 
   const onChangeHandlerPassword = (e: any) => {
@@ -48,7 +56,11 @@ export const Auth = () => {
             onChange={onChangeHandlerPassword}
           />
           <NavLink to={"/personal"}>
-            <Arrow onClick={toSetLogin} />
+            {!state.in_progress ? (
+              <Arrow onClick={toSetLogin} />
+            ) : (
+              <DisabledArrow />
+            )}
           </NavLink>
         </form>
         <div className={classes.issueBlock}>

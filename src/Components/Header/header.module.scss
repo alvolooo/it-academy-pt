@@ -39,6 +39,11 @@ a:hover {
   opacity: 0.5;
 }
 
+.block {
+  display: flex;
+  flex-direction: row;
+}
+
 @media (max-width: 768px) {
   .header {
     height: 50px;
