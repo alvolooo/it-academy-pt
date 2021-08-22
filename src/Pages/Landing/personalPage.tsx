@@ -11,11 +11,7 @@ export const PersonalPage = () => {
       <>
         <Wrapper theme={"dark"}>
           <Container>
-            <Personal
-              name={"Волошина Александра Андреевна"}
-              login={"alvolooo@mail.ru"}
-              token={"125698"}
-            />
+            <Personal/>
           </Container>
         </Wrapper>
         <Wrapper theme={"light"}>

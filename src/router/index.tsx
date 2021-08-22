@@ -9,6 +9,7 @@ import {} from "../Pages/Landing";
 import React from "react";
 import { AuthPage } from "../Pages/Landing/authPage";
 import { PersonalPage } from "../Pages/Landing/personalPage";
+import { Cert } from "../Components/HomePage/cert";
 
 export const Router = () => {
   return (
@@ -21,7 +22,7 @@ export const Router = () => {
       <Route path={"/courses"} component={Landing} exact={true} />
       <Route path={"/auth"} component={AuthPage} exact={true} />
       <Route path={"/personal"} component={PersonalPage} exact={true} />
-      <Route path={"/personal"} component={PersonalPage} exact={true} />
+      <Route path={"/cert"} component={Cert} exact={true} />
     </Switch>
   );
 };

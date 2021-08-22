@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import NumberFormat from "react-number-format";
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -11,16 +11,14 @@ import { Container } from "../Container";
 import { Cert } from "./cert";
 import { Wrapper } from "../Wrapper";
 import { addCert, deleteCert } from "../../redux/actions-create/certActions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../redux/type";
+import { ActionState } from "../../redux/actions-create/authAction";
+import { ActionCertState } from "../types/cert";
 
 export const CertChecker = () => {
   const dispatch = useDispatch();
-  const [id, setId] = useState("");
-  const [fullName, setFullName] = useState("");
-  const [direction, setDirection] = useState("");
-  const [dateStart, setDateStart] = useState("");
-  const [dateFinish, setDateFinish] = useState("");
-  const [features, setFeatures] = useState("");
+  const state = useSelector<RootState, ActionCertState>((state) => state.cert);
 
   const setCert = async () => {
     await dispatch(addCert());
@@ -31,17 +29,23 @@ export const CertChecker = () => {
     initialValues: { certNumber: "" },
     onSubmit: (values) => console.log(values),
     validationSchema: yup.object().shape({
-      certNumber: yup.string().min(15).max(15),
+      certNumber: yup.string().min(13).max(13),
     }),
   });
 
+  useEffect(() => {
+    if (formik.isValid) {
+      console.log(state);
+      //state.id = Number(formik.values.certNumber);
+      setCert();
+    }
+  }, [formik.isValid]);
   // if (formik.isValid) {
   //   {
-  //     setId(formik.values.certNumber);
+  //     //
   //     setCert();
   //   }
   // }
-  //const { isShow, certificate, fillData } = useContext(CertificateContext);
 
   return (
     <>
@@ -56,7 +60,7 @@ export const CertChecker = () => {
             value={formik.values.certNumber}
             onChange={formik.handleChange}
             name={"certNumber"}
-            format={"##-####-#######"}
+            //format={"##-####-#######"}
             placeholder={"08-09270-7321897"}
           />
           {/*<input*/}
@@ -83,13 +87,18 @@ export const CertChecker = () => {
           )}
         </form>
       </div>
-      {isShow ? (
-        <Wrapper theme={"light"}>
-          <Container>
-            <Cert />
-          </Container>
-        </Wrapper>
-      ) : null}
+      <Wrapper theme={"light"}>
+        <Container>
+          <Cert />
+        </Container>
+      </Wrapper>
+      {/*{isShow ? (*/}
+      {/*  <Wrapper theme={"light"}>*/}
+      {/*    <Container>*/}
+      {/*      <Cert />*/}
+      {/*    </Container>*/}
+      {/*  </Wrapper>*/}
+      {/*) : null}*/}
     </>
   );
 };

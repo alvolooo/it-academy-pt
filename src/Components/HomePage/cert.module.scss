@@ -1,3 +1,27 @@
+@font-face {
+  font-family: 'HelveticaNeueCyr';
+  src: url('../../fonts/HelveticaNeueCyr-Thin.eot');
+  src: local('HelveticaNeueCyr-Thin'),
+  url('../../fonts/HelveticaNeueCyr-Thin.eot?#iefix') format('embedded-opentype'),
+  url('../../fonts/HelveticaNeueCyr-Thin.woff2') format('woff2'),
+  url('../../fonts/HelveticaNeueCyr-Thin.woff') format('woff'),
+  url('../../fonts/HelveticaNeueCyr-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'HelveticaNeueCyr';
+  src: url('../../fonts/HelveticaNeueCyr-Medium.eot');
+  src: local('HelveticaNeueCyr-Medium'),
+  url('../../fonts/HelveticaNeueCyr-Medium.eot?#iefix') format('embedded-opentype'),
+  url('../../fonts/HelveticaNeueCyr-Medium.woff2') format('woff2'),
+  url('../../fonts/HelveticaNeueCyr-Medium.woff') format('woff'),
+  url('../../fonts/HelveticaNeueCyr-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
 .container {
   display: flex;
   flex-direction: row;
@@ -63,15 +87,139 @@
 }
 
 .certificate {
-  background-image: url("../../assets/Rectangle1166.svg");
+  width: 868px;
+  height: 464px;
+  background: url("../../assets/bg.jpg")  ;
+  border-radius: 12px;
   display: flex;
   justify-content: flex-start;
+
   &__blackRec {
     position: absolute;
   }
+
+  &__textContainer {
+      margin-top: 72px;
+      margin-left: 72px;
+      position: relative;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+
+      &__certLogo {
+        width: 182px;
+
+      }
+
+    hr {
+      margin-top: 6px;
+      width: 509px;
+      height: 1px;
+      background: #FFFFFF;
+      border: none;
+    }
+  }
 }
 
-.cer {
-  width: 65%;
+.name {
+  font-family: "HelveticaNeueCyr";
+  font-weight: 500;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 22px;
+  /* identical to box height, or 137% */
+
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+
+  /* 3 */
+
+  color: #FFFFFF;
+  margin-bottom: 0;
+}
+
+.firstText {
+  margin-top: 72px;
+  color: #FFFFFF;
+  width: 134px;
+  font-size: 11px;
+  font-family: "HelveticaNeueCyr";
+  font-style: normal;
+  font-weight: 100;
+}
+
+.secText {
+  margin-top: 35px;
+  color:  #FFE924;
+  width: 45%;
+  font-weight: 100;
+  font-size: 11px;
+  font-family: "HelveticaNeueCyr";
+  font-style: normal;
+  font-weight: 100;
+  span {
+    color:  #FFE924;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+}
+
+.features {
+
+}
+
+.feature {
+  font-family: "HelveticaNeueCyr";
+  font-style: normal;
+  font-weight: 100;
+  font-size: 11px;
+  line-height: 46px;
+  /* or 415% */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: 0.1em;
+
+  /* 2 */
+
+  color: #FFE924;
+  width: 62px;
+  height: 21px;
+
+  /* 2 */
+
+  border: 1px solid #FFE924;
+  box-sizing: border-box;
+  border-radius: 42px;
+}
+
+
+.dirBlock {
+  margin-top: 48px;
+  display: flex;
+  flex-direction: row;
+  p {
+    font-family: "HelveticaNeueCyr";
+    font-style: normal;
+    font-weight: 100;
+    font-size: 11px;
+    line-height: 15px;
+    /* or 136% */
+
+    letter-spacing: -0.01em;
+
+    /* 4 */
+
+    color: #898989;
+    margin-right: 17px;
+
+  }
+}
+.jellyfish {
+  z-index: 5;
+  width: 428px;
+  margin-top: 9%;
+  margin-left: 46%;
 }
 
