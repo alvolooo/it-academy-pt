@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import NumberFormat from "react-number-format";
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -11,17 +11,15 @@ import { Container } from "../Container";
 import { Cert } from "./cert";
 import { Wrapper } from "../Wrapper";
 import { addCert, deleteCert } from "../../redux/actions-create/certActions";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../redux/type";
-import { ActionState } from "../../redux/actions-create/authAction";
-import { ActionCertState } from "../types/cert";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { useActions } from "../../hooks/useAction";
 
 export const CertChecker = () => {
-  const dispatch = useDispatch();
-  const state = useSelector<RootState, ActionCertState>((state) => state.cert);
+  const state = useTypedSelector((state) => state.auth);
+  const { addCert, deleteCert } = useActions();
 
   const setCert = async () => {
-    await dispatch(addCert());
+    addCert();
   };
 
   const [isShow, setIsShow] = useState(false);
@@ -40,12 +38,6 @@ export const CertChecker = () => {
       setCert();
     }
   }, [formik.isValid]);
-  // if (formik.isValid) {
-  //   {
-  //     //
-  //     setCert();
-  //   }
-  // }
 
   return (
     <>
@@ -87,18 +79,13 @@ export const CertChecker = () => {
           )}
         </form>
       </div>
-      <Wrapper theme={"light"}>
-        <Container>
-          <Cert />
-        </Container>
-      </Wrapper>
-      {/*{isShow ? (*/}
-      {/*  <Wrapper theme={"light"}>*/}
-      {/*    <Container>*/}
-      {/*      <Cert />*/}
-      {/*    </Container>*/}
-      {/*  </Wrapper>*/}
-      {/*) : null}*/}
+      {isShow ? (
+        <Wrapper theme={"light"}>
+          <Container>
+            <Cert />
+          </Container>
+        </Wrapper>
+      ) : null}
     </>
   );
 };

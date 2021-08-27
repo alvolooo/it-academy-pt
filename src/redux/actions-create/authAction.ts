@@ -9,6 +9,7 @@ export const login = () => {
       const { login } = useAuth();
       const obj = await login();
       localStorage.setItem("userData", JSON.stringify(obj));
+      debugger;
       dispatch({ type: AuthType.LOGIN, payLoad: obj });
       dispatch({ type: AuthType.IN_PROGRESS, payLoad: false });
     } catch (e) {

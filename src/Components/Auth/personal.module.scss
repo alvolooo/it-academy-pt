@@ -2,8 +2,10 @@
   display: flex;
   flex-direction: row;
   padding-bottom: 75px;
+
   &__photo {
     width: 24%;
+    margin-right: 20px;
   }
 }
 

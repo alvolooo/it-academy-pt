@@ -5,14 +5,16 @@ import { ReactComponent as Logo } from "../../assets/Logo.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/type";
 import { logout } from "../../redux/actions-create/authAction";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { useActions } from "../../hooks/useAction";
 
 export const Header = () => {
-  const dispatch = useDispatch();
+  const state = useTypedSelector((state) => state.auth);
+  const { login, logout } = useActions();
   const setLogout = () => {
-    dispatch(logout());
+    logout();
   };
-  const history = useHistory();
-  const token = useSelector<RootState, string>((state) => state.auth.token);
+  const token = useTypedSelector((state) => state.auth.token);
   return (
     <header className={classes.header}>
       <NavLink to={"/"}>
