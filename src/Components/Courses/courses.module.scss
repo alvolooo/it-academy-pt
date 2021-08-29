@@ -33,7 +33,8 @@
   align-items: center;
   background: #1C1C1C;
   height: 61px;
-  position: absolute;
+  z-index: 5;
+  position: relative;
   /* 4 */
 
   border: 2px solid #898989;
@@ -65,11 +66,17 @@
   }
 }
 
+.oppo {
+  position: absolute;
+  top: 0px;
+}
+
 .selectBlock {
   margin-top: 48px;
   margin-bottom: 192px;
   display: flex;
   flex-direction: row;
+  position: relative;
 }
 
 .bigBlock {

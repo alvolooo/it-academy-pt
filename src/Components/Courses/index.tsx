@@ -1,6 +1,29 @@
 import classes from "./courses.module.scss";
-import sel from "../../assets/Polygon1.svg";
+import open from "../../assets/Polygon1.svg";
+import close from "../../assets/Polygon2.svg";
+import { useState } from "react";
+
+const Select1 = () => {
+  return (
+    <div className={classes.oppo}>
+      <div className={classes.square}></div>
+      <div className={`${classes.block} ${classes.sel1}`}></div>
+    </div>
+  );
+};
+
+const Select2 = () => {
+  return (
+    <div className={classes.oppo}>
+      <div className={classes.square}></div>
+      <div className={`${classes.block} ${classes.sel2}`}></div>
+    </div>
+  );
+};
+
 export const Courses = () => {
+  const [isShowCourse, setisShowCourse] = useState(false);
+  const [isShowPeriod, setisShowPeriod] = useState(false);
   return (
     <>
       <div>
@@ -15,22 +38,24 @@ export const Courses = () => {
         <div className={classes.bigBlock}>
           <div className={`${classes.sel} ${classes.sel1}`}>
             <p>выберите курс</p>
-            <img src={sel} />
+            {!isShowCourse ? (
+              <img src={open} onClick={() => setisShowCourse(true)} />
+            ) : (
+              <img src={close} onClick={() => setisShowCourse(false)} />
+            )}
           </div>
-          <div>
-            <div className={classes.square}></div>
-            <div className={`${classes.block} ${classes.sel1}`}></div>
-          </div>
+          {isShowCourse ? <Select1 /> : null}
         </div>
         <div className={classes.bigBlock}>
           <div className={`${classes.sel} ${classes.sel2}`}>
             <p>период</p>
-            <img src={sel} />
+            {!isShowPeriod ? (
+              <img src={open} onClick={() => setisShowPeriod(true)} />
+            ) : (
+              <img src={close} onClick={() => setisShowPeriod(false)} />
+            )}
           </div>
-          <div>
-            <div className={classes.square}></div>
-            <div className={`${classes.block} ${classes.sel2}`}></div>
-          </div>
+          {isShowPeriod ? <Select2 /> : null}
         </div>
       </div>
     </>

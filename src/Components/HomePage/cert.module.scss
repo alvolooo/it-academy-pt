@@ -165,7 +165,8 @@
 }
 
 .features {
-
+  display: flex;
+  flex-direction: row;
 }
 
 .feature {
@@ -184,9 +185,11 @@
   /* 2 */
 
   color: #FFE924;
-  width: 62px;
   height: 21px;
-
+  width: max-content;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: 5px;
   /* 2 */
 
   border: 1px solid #FFE924;

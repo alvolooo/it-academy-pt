@@ -17,7 +17,7 @@ import { useActions } from "../../hooks/useAction";
 export const CertChecker = () => {
   const state = useTypedSelector((state) => state.auth);
   const { addCert, deleteCert } = useActions();
-
+  const [number, setNumber] = useState(0);
   const setCert = async () => {
     addCert();
   };
@@ -26,18 +26,16 @@ export const CertChecker = () => {
   const formik = useFormik({
     initialValues: { certNumber: "" },
     onSubmit: (values) => console.log(values),
-    validationSchema: yup.object().shape({
-      certNumber: yup.string().min(13).max(13),
-    }),
   });
 
-  useEffect(() => {
-    if (formik.isValid) {
-      console.log(state);
-      //state.id = Number(formik.values.certNumber);
-      setCert();
-    }
-  }, [formik.isValid]);
+  const toMakeID = (id: string) => {
+    let arr = id.split("-");
+    let joinArr = arr.join("");
+    if (joinArr.length == 13) {
+      const res: number = Number(joinArr);
+      return res;
+    } else return 0;
+  };
 
   return (
     <>
@@ -52,24 +50,23 @@ export const CertChecker = () => {
             value={formik.values.certNumber}
             onChange={formik.handleChange}
             name={"certNumber"}
-            //format={"##-####-#######"}
+            format={"##-####-#######"}
             placeholder={"08-09270-7321897"}
+            onValueChange={(value) => {
+              setNumber(toMakeID(value.value));
+              if (number != 0) setCert();
+            }}
           />
-          {/*<input*/}
-          {/*  type="text"*/}
-          {/*  name={"certNumber"}*/}
-          {/*  value={formik.values.certNumber}*/}
-          {/*  onChange={formik.handleChange}*/}
-          {/*/>*/}
-          {formik.isValid && isShow ? (
+          {number != 0 && isShow ? (
             <CircleArrow
               onClick={() => {
                 setIsShow(false);
                 formik.values.certNumber = "";
+                deleteCert();
               }}
               className={classes.arrow}
             />
-          ) : formik.isValid ? (
+          ) : number != 0 ? (
             <Arrow
               className={classes.arrow__active}
               onClick={() => setIsShow(true)}

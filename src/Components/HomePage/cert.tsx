@@ -16,9 +16,9 @@ export const Cert = () => {
           <div>
             <p className={classes.title}>Сертификат</p>
             <p className={classes.text}>
-              №{/*{state.id} */} 5555555555555
+              №{state.id}
               <br />
-              {/*{state.fullName}*/} Gtnhjd Gtnh Gtnhjdbx
+              {state.fullName}
             </p>
           </div>
           <div>
@@ -27,18 +27,22 @@ export const Cert = () => {
           </div>
           <div>
             <p className={classes.title}>Направление подготовки:</p>
-            <p className={classes.text}>{/*{state.direction}*/} front</p>
+            <p className={classes.text}>{state.direction}</p>
           </div>
           <div>
             <p className={classes.title}>Период обучения:</p>
             <p className={classes.text}>
               {" "}
-              {/*{state.dateStart} - {state.dateFinish}*/} 12-45
+              {state.dateStart} - {state.dateFinish}
             </p>
           </div>
           <div>
             <p className={classes.title}>Изучено:</p>
-            <p className={classes.text}>{/*{state.features}*/} figma</p>
+            <p className={classes.text}>
+              {state.features.map((feature) => (
+                <span>{feature.name}; </span>
+              ))}
+            </p>
           </div>
         </div>
         <div className={classes.certificate}>
@@ -51,23 +55,23 @@ export const Cert = () => {
             <p className={classes.firstText}>
               Сертификат о прохождении обучения
             </p>
-            <span className={classes.name}>
-              {/*{state.fullName}*/} Gtnhjd Gtnh Gtnhjdbx
-            </span>
+            <span className={classes.name}>{state.fullName}</span>
             <hr />
             <p className={classes.secText}>
               Направление подготовки{" "}
               <span className={classes.certificate__textContainer__spanText}>
-                DESIGN
+                {state.direction}
               </span>{" "}
               <br />
               период обучения{" "}
               <span className={classes.certificate__textContainer__spanText}>
-                01.07.2021-30.08.2021
+                {state.dateStart} - {state.dateFinish}
               </span>
             </p>
             <div className={classes.features}>
-              <span className={classes.feature}>Figma</span>
+              {state.features.map((feature) => (
+                <span className={classes.feature}>{feature.name} </span>
+              ))}
             </div>
             <div className={classes.dirBlock}>
               <p>

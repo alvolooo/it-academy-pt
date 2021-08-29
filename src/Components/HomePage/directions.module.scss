@@ -9,11 +9,24 @@
   height: 25px;
 }
 
+.nav {
+  margin: 0;
+}
+
 .titleBlock {
   display: flex;
   flex-direction: row;
   align-items: center;
   height: 50px;
+
+  &:hover {
+    p   {
+      color: #FFE924;
+    }
+    img {
+      content: url("../../assets/ArrowYellow.svg");
+    }
+  }
 }
 
 .title {
