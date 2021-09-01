@@ -37,7 +37,7 @@ function getData(): Promise<CertificateData> {
             },
           ],
         }),
-      5000
+      3000
     );
   });
 }

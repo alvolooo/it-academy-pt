@@ -13,11 +13,13 @@ import { Wrapper } from "../Wrapper";
 import { addCert, deleteCert } from "../../redux/actions-create/certActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { useActions } from "../../hooks/useAction";
+import { log } from "util";
 
 export const CertChecker = () => {
-  const state = useTypedSelector((state) => state.auth);
+  const state = useTypedSelector((state) => state.cert);
   const { addCert, deleteCert } = useActions();
-  const [number, setNumber] = useState(0);
+  const [number, setNumber] = useState(1);
+
   const setCert = async () => {
     addCert();
   };
@@ -52,9 +54,11 @@ export const CertChecker = () => {
             name={"certNumber"}
             format={"##-####-#######"}
             placeholder={"08-09270-7321897"}
-            onValueChange={(value) => {
-              setNumber(toMakeID(value.value));
-              if (number != 0) setCert();
+            onValueChange={async (value) => {
+              if (toMakeID(value.value) != 0) {
+                setNumber(toMakeID(value.value));
+                await setCert();
+              }
             }}
           />
           {number != 0 && isShow ? (
@@ -69,7 +73,13 @@ export const CertChecker = () => {
           ) : number != 0 ? (
             <Arrow
               className={classes.arrow__active}
-              onClick={() => setIsShow(true)}
+              onClick={() => {
+                !state.in_progress ? (
+                  setIsShow(true)
+                ) : (
+                  <Arrow className={classes.arrow} />
+                );
+              }}
             />
           ) : (
             <Arrow className={classes.arrow} />

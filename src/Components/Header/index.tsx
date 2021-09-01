@@ -25,10 +25,15 @@ export const Header = () => {
         <a
           href={"https://academy.profsoft.pro/"}
           className={classes.header__link}
+          target="_blank"
         >
           Академия
         </a>
-        <a href={"https://www.profsoft.pro/"} className={classes.header__link}>
+        <a
+          href={"https://www.profsoft.pro/"}
+          className={classes.header__link}
+          target="_blank"
+        >
           Компания
         </a>
         <NavLink
