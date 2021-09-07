@@ -1,11 +1,18 @@
 import classes from "./courses.module.scss";
 import open from "../../assets/Polygon1.svg";
 import close from "../../assets/Polygon2.svg";
+import arrow from "../../assets/arrowWhite.svg";
 import { useState } from "react";
+import { Design } from "./design";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { useActions } from "../../hooks/useAction";
 
 export const Courses = () => {
+  const state = useTypedSelector((state) => state.course);
   const [isShowCourse, setisShowCourse] = useState(false);
   const [isShowPeriod, setisShowPeriod] = useState(false);
+
+  const { addCourse, hideCourse, showCourse } = useActions();
 
   const select = {
     select1: {
@@ -13,11 +20,11 @@ export const Courses = () => {
       isActive: false,
       array: [
         { id: 0, sel: "все" },
-        { id: 1, sel: "Frontend" },
+        { id: 1, sel: "Design" },
         { id: 2, sel: "Backend" },
         { id: 3, sel: "iOS" },
         { id: 4, sel: "Android" },
-        { id: 5, sel: "Design" },
+        { id: 5, sel: "FalseDesign" },
         { id: 6, sel: "QA" },
         { id: 7, sel: "PM" },
       ],
@@ -40,26 +47,28 @@ export const Courses = () => {
     { id: 1, active: false, select: "период" },
   ];
 
-  const [state, setState] = useState(initialState);
+  // const [state, setState] = useState(initialState);
+
+  const setCourse = () => {
+    addCourse();
+  };
 
   const Select1 = () => {
-    const arr = [
-      "все",
-      "Frontend",
-      "Backend",
-      "iOS",
-      "Android",
-      "Design",
-      "QA",
-      "PM",
-    ];
     return (
       <div className={classes.oppo}>
         <div className={classes.square}></div>
         <div className={`${classes.block} ${classes.sel1}`}>
           <div className={classes.block__textContainer}>
             {select.select1.array.map((direction) => (
-              <p>{direction.sel}</p>
+              <p
+                onClick={() => {
+                  state.id = direction.id;
+                  setisShowCourse(false);
+                  setCourse();
+                }}
+              >
+                {direction.sel}
+              </p>
             ))}
           </div>
         </div>
@@ -96,7 +105,7 @@ export const Courses = () => {
       <div className={classes.selectBlock}>
         <div className={classes.bigBlock}>
           <div className={`${classes.sel} ${classes.sel1}`}>
-            <p>{state[0].select}</p>
+            <p>{state.title ? state.title : "выберите курс"}</p>
             {!isShowCourse ? (
               <img src={open} onClick={() => setisShowCourse(true)} />
             ) : (
@@ -107,7 +116,7 @@ export const Courses = () => {
         </div>
         <div className={classes.bigBlock}>
           <div className={`${classes.sel} ${classes.sel2}`}>
-            <p>{state[1].select}</p>
+            <p>период</p>
             {!isShowPeriod ? (
               <img src={open} onClick={() => setisShowPeriod(true)} />
             ) : (
@@ -116,6 +125,14 @@ export const Courses = () => {
           </div>
           {isShowPeriod ? <Select2 /> : null}
         </div>
+        <img
+          src={arrow}
+          className={classes.arrow}
+          onClick={() => {
+            state.isShow = true;
+            setCourse();
+          }}
+        />
       </div>
     </>
   );

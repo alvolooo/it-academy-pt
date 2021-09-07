@@ -1,30 +1,37 @@
 import React, { useEffect, useState } from "react";
 import NumberFormat from "react-number-format";
 import { useFormik } from "formik";
-import * as yup from "yup";
 
 //other
 import classes from "./certChecker.module.scss";
 import { ReactComponent as Arrow } from "../../assets/arrow.svg";
 import { ReactComponent as CircleArrow } from "../../assets/CircleArrow.svg";
+import { ReactComponent as GreyArrow } from "../../assets/GreyArrow.svg";
 import { Container } from "../Container";
 import { Cert } from "./cert";
 import { Wrapper } from "../Wrapper";
 import { addCert, deleteCert } from "../../redux/actions-create/certActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { useActions } from "../../hooks/useAction";
-import { log } from "util";
 
 export const CertChecker = () => {
   const state = useTypedSelector((state) => state.cert);
-  const { addCert, deleteCert } = useActions();
-  const [number, setNumber] = useState(1);
+  const isShowState = useTypedSelector((state) => state.isShow);
+  const { addCert, deleteCert, show, hide } = useActions();
+  const [number, setNumber] = useState(0);
 
   const setCert = async () => {
     addCert();
   };
 
-  const [isShow, setIsShow] = useState(false);
+  const showCert = () => {
+    show();
+  };
+
+  const hideCert = () => {
+    hide();
+  };
+
   const formik = useFormik({
     initialValues: { certNumber: "" },
     onSubmit: (values) => console.log(values),
@@ -55,38 +62,42 @@ export const CertChecker = () => {
             format={"##-####-#######"}
             placeholder={"08-09270-7321897"}
             onValueChange={async (value) => {
-              if (toMakeID(value.value) != 0) {
-                setNumber(toMakeID(value.value));
+              let temp: number = toMakeID(value.value);
+              if (temp != 0) {
+                console.log(number);
+                setNumber(temp);
+                console.log(temp);
+                console.log(number);
                 await setCert();
               }
             }}
           />
-          {number != 0 && isShow ? (
+          {number != 0 && isShowState.isShow ? (
             <CircleArrow
               onClick={() => {
-                setIsShow(false);
-                formik.values.certNumber = "";
+                hideCert();
                 deleteCert();
+                formik.values.certNumber = "";
               }}
               className={classes.arrow}
             />
-          ) : number != 0 ? (
+          ) : number != 0 && !isShowState.isShow ? (
             <Arrow
               className={classes.arrow__active}
               onClick={() => {
                 !state.in_progress ? (
-                  setIsShow(true)
+                  showCert()
                 ) : (
-                  <Arrow className={classes.arrow} />
+                  <GreyArrow className={classes.arrow} />
                 );
               }}
             />
           ) : (
-            <Arrow className={classes.arrow} />
+            <GreyArrow className={classes.arrow} />
           )}
         </form>
       </div>
-      {isShow ? (
+      {isShowState.isShow ? (
         <Wrapper theme={"light"}>
           <Container>
             <Cert />

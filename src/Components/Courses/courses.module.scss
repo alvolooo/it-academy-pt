@@ -73,7 +73,7 @@
 
 .selectBlock {
   margin-top: 48px;
-  margin-bottom: 350px;
+  margin-bottom: 192px;
   display: flex;
   flex-direction: row;
   position: relative;
@@ -101,8 +101,11 @@
   background: #FFFFFF;
 }
 
+.arrow {
+  margin-left: 23px;
+}
+
 .block{
-  //height: 386px;
   border: #1C1C1C 1px solid;
   border-top: none;
   &__textContainer {
